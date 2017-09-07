@@ -1,0 +1,32 @@
+#headline{
+    height: 100px;
+    width: auto;
+    margin: 0 auto;
+    background: #000022;
+    font-size:250%;
+    color:#FFFFFF;
+}
+#main {
+    width: 600px;
+    margin: 0 auto;
+}
+body
+{
+    background: #CCCCFF;
+}
+#element
+{
+    box-shadow: 2px 2px 2px #BBBBBB;
+    border:1px solid #888888;
+}
+p
+{
+    color: #333355;
+    text-shadow: 2px 2px 2px #777799;
+}
+a
+{
+    background: #333333;
+    border:1px solid #CCCCDD;
+    color: #DDDDFF;
+}

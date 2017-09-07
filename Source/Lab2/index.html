@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <title>loginpage</title>
+</head>
+<body>
+<div id="headline">
+    <h1>Loginpage</h1>
+</div>
+<a href="mainpage.html">Mainpage</a>
+<a href="Homepage.html">Homepage</a>
+<button type="button" onclick="javascrtpt:window.location.href='index.html'">Login</button>
+<button type="button" onclick="javascrtpt:window.location.href='register.html'">Register</button>
+<hr>
+<div class="input">
+    Username: <input ng-model="user.firstName"></input>
+    <br/><br/>
+    Password: <input ng-model="user.pwd" type="password"></input>
+    <br/><br/>
+    <input type="submit" ng-click="login(user.firstName, user.pwd)" value="Login"></input>
+    <br/><br/>
+</div>
+</body>
+</html>
