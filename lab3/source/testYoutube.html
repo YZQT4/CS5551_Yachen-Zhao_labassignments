@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>YoutubeAPI</title>
+
+    <!-- Bootstrap -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <style type="text/css">
+    #main{
+      position: absolute;
+      top:20%;
+      left:45%;
+      width:100%;
+      transform:translate(-50%,-50%);
+      text-align: center;       
+    }
+    #keyword {
+        left: 100px;
+        position: absolute;
+        top: 50px;
+        width: 300px;
+    }
+    #search {
+        left: 400px;
+        position: absolute;
+        top: 50px;
+    }
+    #result {
+      left: 100px;
+      position: absolute;
+      top: 280px;
+      width: 700px;
+    }
+      #translate{
+        left: 450px;
+        position: absolute;
+        top: 50px;
+      }
+  </style> 
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <div id="headline"><h1>         Youtube Data API</h1></div>
+  <h3>Please input the keyword of the video</h3>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for..." id="keyword">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="search">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+        <div class="col-lg-4" id="translate">
+          <input class="form-control" rows="5" id="result1"></input>
+        </div>
+      </div>
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <ul class="list-group" id = "result">
+    </ul>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+  <script>
+  $('#search').click(function(){
+    var keyword = $('#keyword').val();
+    $.ajax({
+      url : "https://www.googleapis.com/youtube/v3/search",
+      type : 'get',
+      data : {
+        key : 'AIzaSyCT029LRJU0wxw-I1IDgHYCKsczB8U7C3A',
+        part : 'snippet',
+        q : keyword,
+        type : 'video',
+        maxResults : 10
+      },
+      dataType : "json",
+      success: function(data){
+        $("ul").empty();
+        var items = data['items'];
+        $.each(items,function(i,item){
+          var snippet = item['snippet'];
+          var videoId = item['id']['videoId']
+          var title = snippet['title'];
+          $("ul").append('<li class="list-group-item"><a href="https://www.youtube.com/watch?v='+videoId+'">'+title+'</a></li>');
+        });
+      }
+    })
+  })
+
+
+      $('#search').click(function(){
+          var keyword = $('#keyword').val();
+          $.ajax({
+              url : "https://translate.yandex.net/api/v1.5/tr.json/translate",
+              type : 'post',
+              data : {
+                  key : 'trnsl.1.1.20170914T155044Z.2845c22a911a4466.8bacf4dd79fb191f1ac9a482d975d73b68ba0860',
+                  text : keyword,
+                  lang : 'en-es'
+              },
+              dataType : "json",
+              success: function(data){
+                  if(data['code'] == 200){
+                      $('#result1').val(data['text']);
+                  }
+              }
+          })
+      })
+  </script>
+</html>

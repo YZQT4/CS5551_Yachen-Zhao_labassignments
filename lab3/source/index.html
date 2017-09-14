@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <title>loginpage</title>
+</head>
+<body>
+<div id="headline">
+    <h1>Loginpage</h1>
+</div>
+<a href="mainpage.html">Mainpage</a>
+<a href="Homepage.html">Homepage</a>
+<button type="button" onclick="javascrtpt:window.location.href='index.html'">Login</button>
+<button type="button" onclick="javascrtpt:window.location.href='register.html'">Register</button>
+<hr>
+<div class="input">
+    <form action="javascript:void(0);" method="get">
+    Username: <input ng-model="user.firstName"></input>
+    <br/><br/>
+    Password: <input ng-model="user.pwd" type="password"></input>
+    <br/><br/>
+    <input type="submit" ng-click="login(user.firstName, user.pwd)" value="Login"></input>
+        <a onClick="login()">login with facebook</a>
+    </form>
+    <br/><br/>
+
+</div>
+</body>
+</html>
+
+
+
+
+
+<script>
+    // check if stored data from register-form is equal to entered data in the   login-form
+    function check() {
+        // stored data from the register-form
+        var storedName = localStorage.getItem('userName');
+        var storedPassword = localStorage.getItem('userPassword');
+        // entered data from the login-form
+        var userName = document.getElementById('userName');
+        var userPassword = document.getElementById('userPassword');
+        // check if stored data from register-form is equal to data from login form
+        if(userName.value !== storedName || userPassword.value !== storedPassword) {
+            document.getElementById("error_message").innerHTML="Invalid credentials. Please try again ";
+            //alert('ERROR');
+        }else {
+            self.location="welcome.html";
+            //window.navigate("directions.html");
+        }
+    }
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '762403760598872',
+            xfbml: true,
+            version: 'v2.7'
+        });
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                document.getElementById('status').innerHTML = 'We are connected to FaceBook';
+            } else if (response.status === 'not_authorized') {
+                document.getElementById('status').innerHTML = 'We are not connected to FaceBook';
+            } else{
+                document.getElementById('status').innerHTML = 'We are not logged into FaceBook';
+            }
+        });
+    };
+    (function(thisdocument, scriptelement, id) {
+        var js, fjs = thisdocument.getElementsByTagName(scriptelement)[0];
+        if (thisdocument.getElementById(id)) return;
+        js = thisdocument.createElement(scriptelement); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js"; //you can use
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    function  login() {
+        FB.login(function (response) {
+            if (response.status === 'connected') {
+                self.location="welcome.html";
+                document.getElementById('status').innerHTML = 'We are connected to FaceBook';
+            } else if (response.status === 'not_authorized') {
+                document.getElementById('status').innerHTML = 'We are not connected to FaceBook';
+            } else{
+                document.getElementById('status').innerHTML = 'We are not logged into FaceBook';
+            }
+        });
+    }
+</script>
