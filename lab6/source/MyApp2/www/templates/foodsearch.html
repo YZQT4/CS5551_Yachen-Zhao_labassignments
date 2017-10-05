@@ -1,0 +1,29 @@
+<ion-view view-title="foodsearch">
+  <ion-content ng-controller ="foodsearch">
+   <div>
+     <div>
+            <label class="item item-input">
+          <input type="text" ng-model="loca" placeholder="Please enter a location">
+
+        </label>
+         <br>
+         <label  class="item item-input">
+                   <input type="text" ng-model="food" placeholder=" The food that you want">
+         </label>
+         <br>
+        <button class="button button-assertive" ng-click="findRes()">Search
+         </button>
+<br>
+        
+            <!--<input type=text class=" pull-right formcontrol input-sm" ng-model="mtitle" placeholder=" title for tags" >-->
+        
+            
+
+            <br><b>Restaurant name:</b>{{name}}
+            <br><b>Contact:</b>{{contact}}<br>
+            <b>Location:</b>{{location}}<br>
+
+          </div> 
+      </div>
+  </ion-content>
+</ion-view>
