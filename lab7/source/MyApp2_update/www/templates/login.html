@@ -1,0 +1,29 @@
+<ion-modal-view title="Firebase Login">
+  <ion-header-bar>
+    <h1 class="title">Login</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list list-inset">
+                <center>
+                <h2 style="background-color: #5566BB"><font  color="white">Welcome to Yachen's App</font></h2>
+                </center>
+                <label class="item item-input">
+                    <input ng-model="username" type="text" placeholder="Username" />
+                </label>
+                <label class="item item-input">
+                    <input ng-model="password" type="password" placeholder="Password" />
+                </label>
+            </div>
+            <div class="padding-left padding-right">
+                <div class="button-bar">
+                    <a class="button" ng-click="login(username, password)" >Login</a>
+                    <a class="button" ng-click="register(username, password)">Register</a>
+                </div>
+            </div>
+   
+  </ion-content>
+</ion-modal-view>
+
