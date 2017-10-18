@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="" data-ng-app="GoogleDirection">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWhSE1HAi753_M8rcFTfcbBXUQInf8y6c&v=3.exp&sensor=true"></script>
+    <link rel="stylesheet" href="app.css">
+    <style>
+        .menu input{
+            width: 300px;
+            background: transparent;
+            border: 2px solid #3333DD;
+            border-radius: 4px;
+            color: #5e5e5e;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 6px;
+            margin-top: 10px;
+        }
+        .menu button{
+            width: 419px;
+            height:40px;
+            background: #3333DD;
+            border:  2px solid #3333DD;
+            cursor: pointer;
+            border-radius: 4px;
+            color: #ffffff;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 6px;
+            margin-top: 10px;
+        }
+        table {
+            max-width: 960px;
+            margin: 10px auto;
+            border: 1px solid #FFF;
+        }
+
+        caption {
+            font-size: 1.6em;
+            font-weight: 400;
+            padding: 10px 0;
+        }
+
+        thead th {
+            font-weight: 400;
+            background: #8a97a0;
+            color: #FFF;
+        }
+
+        tr {
+            background: #f4f7f8;
+            border: 1px solid #FFF;
+            margin-bottom: 5px;
+        }
+
+        tr:nth-child(even) {
+            background: #e8eeef;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 20px;
+            font-weight: 300;
+        }
+
+        tfoot tr {
+            background: none;
+        }
+
+        tfoot td {
+            padding: 10px 2px;
+            font-size: 0.8em;
+            font-style: italic;
+            color: #8a97a0;
+        }
+    </style>
+
+</head>
+<body>
+<div id="headline"><h1 align="absolute" style="text-align: center; color: #3333DD">Google Map API/Useful Service/</h1></div>
+<hr>
+<div class="wrapp" ng-controller="View1Ctrl">
+    <div class="menu" id="div_SearchContainer">
+        <input type="text"  ng-model="startlocation" id="startlocation" style="left: 300px"/>
+        <input type="text"  ng-model="endlocation" id="endlocation" />
+        <button id="btn_getReview" ng-click="calcRoute()">
+            Get Direction
+        </button>
+        <br/></br>
+    </div>
+    <div id="map-canvas" style="height: 400px;"></div>
+</div>
+
+
+</body>
+</html>
+
+
+
+<script>
+    angular.module('GoogleDirection', [])
+        .controller('googlemapoutput', function ($scope) {
+
+            var map;
+            var mapOptions;
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                draggable: true
+            });
+            var directionsService = new google.maps.DirectionsService();
+
+            $scope.initialize = function () {
+                var pos = new google.maps.LatLng(0, 0);
+                var mapOptions = {
+                    zoom: 3,
+                    center: pos
+                };
+
+                map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+            };
+            $scope.calcRoute = function () {
+                var end = document.getElementById('endlocation').value;
+                var start = document.getElementById('startlocation').value;
+
+                var request = {
+                    origin: start,
+                    destination: end,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+
+                directionsService.route(request, function (response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setMap(map);
+                        directionsDisplay.setDirections(response);
+                        console.log(status);
+                    }
+
+                });
+            };
+
+            google.maps.event.addDomListener(window, 'load', $scope.initialize);
+
+        });
+
+
+
+</script>
+
+

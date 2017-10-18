@@ -1,0 +1,7 @@
+The use case for FourSquare Web service:
+1. The user finds a nearby restaurant to eat.
+2. The user finds a restaurant who has sushi.
+3. The user gets more information about a restaurant.
+    a.The user gets the location of the restaurant
+    b.The user gets the contact infomation of the restaurant
+
