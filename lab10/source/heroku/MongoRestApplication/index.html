@@ -1,0 +1,89 @@
+<!DOCTYPE html >
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <script type="text/javascript" src="Inserttry.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            var fun = insertData; //引用abc函数
+            fun();
+        };
+
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+    <style>
+
+    </style>
+
+</head>
+<body class="body">
+
+
+<div  ng-controller="View1Ctrl" style="top: 200px">
+    <form class="contact_form"  style="background: #FFF; width:100%;" ng-submit="insertData()" name="contact_form">
+        <div class="menu" id="div_SearchContainer">
+            <h1 align="absolute" style="text-align: center; color: #3333DD">Welcome to Yachen's App!</h1>
+            <input type="text" class="textbox1" name="txt_placeName" id="txt_placeName" placeholder="Enter the place you want to search for" ng-model="formData.txt_placeName" required />
+            <input type="text" class="textbox1" name="txt_searchFilter" id="txt_searchFilter" placeholder="Enter the search query" ng-model="formData.txt_searchFilter" required />
+            <button id="btn_getReview" ng-click="getVenues()">Get Venues</button>
+        </div>
+        <div  id="div_VenueList">
+            <div ng-repeat="venue in venueList" style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none; list-style-position:inside;">
+                <input id="vname" name="placename" type="checkbox"  value="" ng-model="formData.placename" >{{venue.name}}
+                <button ng-click="deleteData(venue.name)">Delete from database</button>
+
+
+            </div>
+
+            <div  style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none; list-style-position:inside;">
+
+                <button ng-click="finddata()">Show all the data</button>
+
+            </div>
+
+            <div  style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none; list-style-position:inside;">
+
+                <p>{{datalist.name}}</p>
+
+            </div>
+
+
+
+            <h2 style="text-align: center; color: #3333DD"> Top Five Picks From FourSquare Review API </h2>
+        </div>
+    </form>
+
+
+    <div id="div_ReviewList" style="display:none;"  >
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+</body>
+</html>

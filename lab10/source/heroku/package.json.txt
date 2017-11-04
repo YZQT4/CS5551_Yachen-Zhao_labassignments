@@ -1,0 +1,12 @@
+{
+    "name":"lab10",
+    "version":"1.0.0"
+    "scripts":{
+         "start":"MongoConnection.js"
+    },
+    "dependencies":{
+         "express":"4.13.3"
+    },
+    "author":"Yachen Zhao",
+    "license":"ISC"
+}
